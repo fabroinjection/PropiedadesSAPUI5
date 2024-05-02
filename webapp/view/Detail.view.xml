@@ -1,0 +1,125 @@
+<mvc:View controllerName="com.softtek.propiedadesaca.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:smartField="sap.ui.comp.smartfield">
+    <Page id="DetailPage" showFooter="true" showHeader="false" showNavButton="true" navButtonPress="onBack">
+        <content>
+            <ObjectHeader id="_IDGenObjectHeader1"
+                intro="{TipoProp}"
+                title="{= ${NombreDuenio} + ' ' + ${ApellidoDuenio}}"
+                number="{= '$' + parseFloat(${Precio}).toFixed(2)}"
+                numberState="Warning"
+                backgroundDesign="Translucent">
+                <attributes>
+                    <ObjectAttribute id="_IDGenObjectAttribute1"
+                        title="Ubicación"
+                        text="{=${Provincia} + ', ' + ${Localidad} + ', ' + ${NombreCalle} + ' ' + ${NumeroCalle}}"/>
+                </attributes>
+                <statuses>
+                    <ObjectStatus id="_IDGenObjectStatus1"
+                        title="Estado"
+                        text="Desocupada"
+                        state="Success"/>
+                </statuses>
+            </ObjectHeader>
+
+            <OverflowToolbar id="_IDGenOverflowToolbar2">
+                <ToolbarSpacer id="_IDGenToolbarSpacer3" />
+                <Button id="_IDGenButton3" icon="sap-icon://edit" press="onEditPropiedad" tooltip="Editar" type="Transparent"/>
+            </OverflowToolbar>
+            
+        	<smartForm:SmartForm id="smartForm"
+			title="{Name}">
+                <smartForm:Group id="_IDGenGroup1" label="Propiedad">
+                    <smartForm:GroupElement id="_IDGenGroupElement1">
+                        <smartField:SmartField id="_IDGenSmartField1" value="1" />
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement id="_IDGenGroupElement2" label="Tipo Propiedad">
+                        <smartField:SmartField id="_IDGenSmartField2" value="{TipoProp}" />
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement id="_IDGenGroupElement4" label="Precio">
+                        <smartField:SmartField id="_IDGenSmartField4" value="{Precio}" />
+                    </smartForm:GroupElement>
+                </smartForm:Group>
+                <smartForm:Group id="_IDGenGroup2" label="Propietario">
+                    <smartForm:GroupElement id="_IDGenGroupElement6" label="Nombre">
+                        <smartField:SmartField id="_IDGenSmartField6" value="{NombreDuenio}" />
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement id="_IDGenGroupElement7" label="Apellido">
+                        <smartField:SmartField id="_IDGenSmartField7" value="{ApellidoDuenio}" />
+                    </smartForm:GroupElement>
+                </smartForm:Group>
+                <smartForm:Group id="_IDGenGroup4" label="Especificaciones">
+                    <smartForm:GroupElement id="_IDGenGroupElement9" label="Habitaciones">
+                        <smartField:SmartField id="_IDGenSmartField9" value="{NumHabitaciones}" />
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement id="_IDGenGroupElement10" label="Superficie">
+                        <smartField:SmartField id="_IDGenSmartField10" value="{=${Superficie} + ' m2' }" />
+                    </smartForm:GroupElement>
+                </smartForm:Group>
+                <smartForm:Group id="_IDGenGroup5">
+                    <smartForm:GroupElement id="_IDGenGroupElement11" label="Habitaciones">
+                        
+                    </smartForm:GroupElement>
+                </smartForm:Group>
+            </smartForm:SmartForm>
+
+            <Table id="idProductsTable"
+					 mode="SingleSelect"
+					 items="{ToVisitaSet}"
+                     selectionChange="onSelectionChange">
+
+				<headerToolbar>
+					<OverflowToolbar id="_IDGenOverflowToolbar1">
+						<ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+						<OverflowToolbarButton id="_IDGenOverflowToolbarButton1"
+								type="Transparent"
+								icon="sap-icon://add"
+								press="onCreateVisita"/>
+					</OverflowToolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="_IDGenColumn1" width="12em">
+						<Text id="_IDGenText1" text="Nombre"/>
+					</Column>
+					<Column id="_IDGenColumn2" width="12em">
+						<Text id="_IDGenText2" text="Apellido"/>
+					</Column>
+                    <Column id="_IDGenColumn3" width="12em">
+						<Text id="_IDGenText3" text="Puntuación"/>
+					</Column>
+                    <Column id="_IDGenColumn4" width="12em">
+						<Text id="_IDGenText4" text="Fecha"/>
+					</Column>
+                    <Column id="_IDGenColumn5" width="12em">
+						<Text id="_IDGenText5" text="Observaciones"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem id="_IDGenColumnListItem1">
+						<cells>
+							<Text id="_IDGenText6" text="{NombreVisit}"/>
+							<Text id="_IDGenText7" text="{ApellidoVisit}"/>
+                            <Text id="_IDGenText8" text="{Puntuacion}"/>
+                            <Text id="_IDGenText9" text="{Fecha}"/>
+                            <Text id="_IDGenText10" text="{Observaciones}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+            <Toolbar id="_IDGenToolbar1" visible="{= ${idProductsTable>/selectedItem} !== null}">
+                <ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+                <Button id="_IDGenButton2" text="Editar"
+                        press="onEditarVisita"
+                        type="Default"/>
+                <Button id="_IDGenButton4" text="Eliminar"
+                        press="onEliminarVisita"
+                        type="Reject"/>
+            </Toolbar>
+        </content>
+        
+    </Page>
+    
+</mvc:View>

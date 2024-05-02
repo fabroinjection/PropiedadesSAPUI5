@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZACA1Q2024_PROPIEDADES_FC_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Propiedad" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdPropiedad"/>
+                </Key>
+                <Property Name="IdPropiedad" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Id de la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NombreDuenio" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Nombre del dueño de la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ApellidoDuenio" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Apellido del dueño de la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoProp" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Tipo de propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Superficie" Type="Edm.Double" Nullable="false" sap:unicode="false" sap:label="Superficie de la propiedad en metros cuadrados." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NombreCalle" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Nombre de la calle de la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NumeroCalle" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Numero de la calle de la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Localidad" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Localidad de la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Provincia" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Provincia de la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NumHabitaciones" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Numero de habitaciones de la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Precio" Type="Edm.Double" Nullable="false" sap:unicode="false" sap:label="Precio de la propiedad en pesos" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToVisitaSet" Relationship="ZACA1Q2024_PROPIEDADES_FC_SRV.Assoc_Propiedad_To_Visita" FromRole="FromRole_Assoc_Propiedad_To_Visita" ToRole="ToRole_Assoc_Propiedad_To_Visita"/>
+            </EntityType>
+            <EntityType Name="Visita" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdVisita"/>
+                    <PropertyRef Name="IdPropiedad"/>
+                </Key>
+                <Property Name="IdVisita" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Id de la visita a la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IdPropiedad" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Id de la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NombreVisit" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Nombre del visitante" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ApellidoVisit" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Apellido del visitante" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Puntuacion" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Puntuación a la propiedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fecha" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Fecha de la visita" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Observaciones" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Observaciones efectuadas por el visitante" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToPropiedad" Relationship="ZACA1Q2024_PROPIEDADES_FC_SRV.Assoc_Propiedad_To_Visita" FromRole="ToRole_Assoc_Propiedad_To_Visita" ToRole="FromRole_Assoc_Propiedad_To_Visita"/>
+            </EntityType>
+            <Association Name="Assoc_Propiedad_To_Visita" sap:content-version="1">
+                <End Type="ZACA1Q2024_PROPIEDADES_FC_SRV.Propiedad" Multiplicity="1" Role="FromRole_Assoc_Propiedad_To_Visita"/>
+                <End Type="ZACA1Q2024_PROPIEDADES_FC_SRV.Visita" Multiplicity="*" Role="ToRole_Assoc_Propiedad_To_Visita"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Assoc_Propiedad_To_Visita">
+                        <PropertyRef Name="IdPropiedad"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Assoc_Propiedad_To_Visita">
+                        <PropertyRef Name="IdPropiedad"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZACA1Q2024_PROPIEDADES_FC_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="PropiedadSet" EntityType="ZACA1Q2024_PROPIEDADES_FC_SRV.Propiedad" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="VisitaSet" EntityType="ZACA1Q2024_PROPIEDADES_FC_SRV.Visita" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="Assoc_Propiedad_To_VisitaSet" Association="ZACA1Q2024_PROPIEDADES_FC_SRV.Assoc_Propiedad_To_Visita" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="PropiedadSet" Role="FromRole_Assoc_Propiedad_To_Visita"/>
+                    <End EntitySet="VisitaSet" Role="ToRole_Assoc_Propiedad_To_Visita"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZACA1Q2024_PROPIEDADES_FC_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZACA1Q2024_PROPIEDADES_FC_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

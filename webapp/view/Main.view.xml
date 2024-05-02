@@ -1,0 +1,51 @@
+<mvc:View controllerName="com.softtek.propiedadesaca.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:grid="sap.ui.layout.cssgrid"
+	xmlns:f="sap.f"
+    xmlns:c="sap.ui.core">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <c:Fragment id="_IDGenFragment1"
+                fragmentName="com.softtek.propiedadesaca.view.fragments.Filtros"
+                type="XML"
+            />
+            <OverflowToolbar id="_IDGenOverflowToolbar1">
+                <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                <OverflowToolbarButton id="_IDGenOverflowToolbarButton1"
+                        type="Transparent"
+                        icon="sap-icon://add-contact"
+                        press="onCreatePropiedad"/>
+            </OverflowToolbar>
+            <f:GridList
+                id="gridList"
+                headerText="Propiedades"
+                mode="SingleSelectMaster"
+                items="{ path: '/PropiedadSet' }"
+                selectionChange="onSelectionPropiedad"
+                delete="onDelete"
+                class="sapUiResponsiveContentPadding">
+                <f:customLayout>
+                    <grid:GridBasicLayout id="_IDGenGridBasicLayout1" gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem" />
+                </f:customLayout>
+
+                <f:GridListItem id="_IDGenGridListItem1"
+                    detailPress="onDetailPress"
+                    highlight="Information">
+                        <FlexBox id="_IDGenFlexBox1" alignItems="Center" justifyContent="SpaceBetween" width="100%">
+                        <VBox id="_IDGenVBox1" height="100%">
+                            <HBox id="_IDGenHBox1" height="100%" class="sapUiSmallMargin" alignItems="Center">
+                                <Image id="_IDGenImage2" src="../css/3d-view-house-model.jpg" width="3rem" class="sapUiSmallMarginEnd" />
+                                <VBox id="_IDGenVBox2">
+                                    <Title id="_IDGenTitle2" text="{TipoProp}" wrapping="true" />
+                                    <Label id="_IDGenLabel1" text="{= ${NombreDuenio} + ' ' + ${ApellidoDuenio}}" wrapping="true" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                        <Button id="_IDGenButton1" icon="sap-icon://delete" press="onDeletePropiedad" tooltip="Eliminar" type="Transparent"/>
+                    </FlexBox>
+                </f:GridListItem>
+            </f:GridList>
+        </content>
+    </Page>
+</mvc:View>

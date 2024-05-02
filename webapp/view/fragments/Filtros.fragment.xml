@@ -1,0 +1,36 @@
+<core:FragmentDefinition 
+	xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:svm="sap.ui.comp.smartvariants"
+    xmlns:fb="sap.ui.comp.filterbar">
+		<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="true" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+			<fb:filterGroupItems>
+				<fb:FilterGroupItem id="_IDGenFilterGroupItem1" name="NombreDuenio" label="Nombre Dueño" groupName="Group1" visibleInFilterBar="true">
+					<fb:control>
+						<Input id="_IDGenInput1" name="NombreDuenio" showValueHelp="true" change="onChangeNombreDuenio" valueHelpRequest="onValueHelpNombreDuenio" busyIndicatorDelay="0" />
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem id="_IDGenFilterGroupItem2" name="ApellidoDuenio" label="Apellido Dueño" groupName="Group1" visibleInFilterBar="true">
+					<fb:control>
+						<Input id="_IDGenInput2" name="ApellidoDuenio" showValueHelp="true" change="onChangeApellidoDuenio" valueHelpRequest="onValueHelpApellidoDuenio" busyIndicatorDelay="0" />
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem id="_IDGenFilterGroupItem3" name="TipoProp" label="Tipo Propiedad" groupName="Group1" visibleInFilterBar="true">
+					<fb:control>
+						<Input id="_IDGenInput3" name="TipoProp" showValueHelp="true" change="onChangeTipoProp" valueHelpRequest="onValueHelpTipoProp" busyIndicatorDelay="0" />
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem id="_IDGenFilterGroupItem4" name="Precio" label="Precio" groupName="Group1" visibleInFilterBar="true">
+					<fb:control>
+						<Input id="_IDGenInput4" name="Precio" showValueHelp="true" change="onChangePrecio" valueHelpRequest="onValueHelpPrecio" busyIndicatorDelay="0" />
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem id="_IDGenFilterGroupItem5" name="Superficie" label="Superficie" groupName="Group1" visibleInFilterBar="true">
+					<fb:control>
+						<Input id="_IDGenInput5" name="Superficie" showValueHelp="true" change="onChangeSuperficie" valueHelpRequest="onValueHelpSuperficie" busyIndicatorDelay="0" />
+					</fb:control>
+				</fb:FilterGroupItem>
+			</fb:filterGroupItems>
+		</fb:FilterBar>
+</core:FragmentDefinition>

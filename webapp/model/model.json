@@ -1,0 +1,9 @@
+{
+    "TiposPropiedad" : [{
+        "key" : "Casa",
+        "name" : "Casa"
+    }, {
+        "key" : "Departamento",
+        "name" : "Departamento"
+    }]
+}
