@@ -1,12 +1,13 @@
 sap.ui.define([
     "./BaseController",
     "sap/m/MessageToast",
+    "sap/m/MessageBox",
     "../model/formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (BaseController, MessageToast, formatter) {
+    function (BaseController, MessageToast, MessageBox, formatter) {
         "use strict";
         var that;
         var selectedItem;
@@ -295,17 +296,33 @@ sap.ui.define([
                         sap.m.MessageBox.error("Error inesperado al actualizar la visita");
                     }
                 });
+                let oGrid = this.getView().byId("gridList");
+                oGrid.removeSelections();
+                this.selectedItem = undefined;
+                this._toggleToolbarVisibility();
             },
             onEliminarVisita: function (oEvent) {
                 let sPath = this.selectedItem.getBindingContextPath()
                 var oDataModel = this.getOwnerComponent().getModel();
-                oDataModel.remove(`${sPath}`, {
-                    success: function (oResponse) {
-                        sap.m.MessageBox.success("Se eliminó correctamente la visita");
-                        that.getOwnerComponent().getModel().refresh(true, true);
-                    },
-                    error: function (oError) {
-                        sap.m.MessageBox.error("Error al eliminar la visita");
+                MessageBox.warning("Desea eliminar la visita?", {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    emphasizedAction: MessageBox.Action.OK,
+                    onClose: function (sAction) {
+                        if (sAction === "OK") {
+                            oDataModel.remove(`${sPath}`, {
+                                success: function (oResponse) {
+                                    let oGrid = that.getView().byId("gridList");
+                                    oGrid.removeSelections();
+                                    that.selectedItem = undefined;
+                                    that._toggleToolbarVisibility();
+                                    sap.m.MessageBox.success("Se eliminó correctamente la visita");
+                                    that.getOwnerComponent().getModel().refresh(true, true);
+                                },
+                                error: function (oError) {
+                                    sap.m.MessageBox.error("Error al eliminar la visita");
+                                }
+                            });
+                        }
                     }
                 });
             },

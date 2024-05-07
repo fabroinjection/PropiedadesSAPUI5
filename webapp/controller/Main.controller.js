@@ -1,12 +1,13 @@
 sap.ui.define([
     "./BaseController",
     "sap/m/MessageToast",
+    "sap/m/MessageBox",
     "../model/formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (BaseController, MessageToast, formatter) {
+    function (BaseController, MessageToast, MessageBox, formatter) {
         "use strict";
         var that;
         return BaseController.extend("com.softtek.propiedadesaca.controller.Main", {
@@ -146,13 +147,21 @@ sap.ui.define([
             onDeletePropiedad: function (oEvent) {
                 let sPath = oEvent.getSource().getBindingContext().getPath();
                 var oDataModel = this.getOwnerComponent().getModel();
-                oDataModel.remove(`${sPath}`, {
-                    success: function (oResponse) {
-                        sap.m.MessageBox.success("Se eliminó correctamente la propiedad");
-                        that.getOwnerComponent().getModel().refresh(true, true);
-                    },
-                    error: function (oError) {
-                        sap.m.MessageBox.error("Error al eliminar la propiedad");
+                MessageBox.warning("Desea eliminar la propiedad?", {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    emphasizedAction: MessageBox.Action.OK,
+                    onClose: function (sAction) {
+                        if (sAction === "OK") {
+                            oDataModel.remove(`${sPath}`, {
+                                success: function (oResponse) {
+                                    sap.m.MessageBox.success("Se eliminó correctamente la propiedad");
+                                    that.getOwnerComponent().getModel().refresh(true, true);
+                                },
+                                error: function (oError) {
+                                    sap.m.MessageBox.error("Error al eliminar la propiedad");
+                                }
+                            });
+                        }
                     }
                 });
             },
