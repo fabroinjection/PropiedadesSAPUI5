@@ -1,14 +1,16 @@
 sap.ui.define([
     "./BaseController",
     "sap/m/MessageToast",
+    "../model/formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (BaseController, MessageToast) {
+    function (BaseController, MessageToast, formatter) {
         "use strict";
         var that;
         return BaseController.extend("com.softtek.propiedadesaca.controller.Main", {
+            formatter: formatter,
             onInit: function () {
                 that = this;
                 var oRouter = this.getRouter();
@@ -23,7 +25,7 @@ sap.ui.define([
                 var oDataModel = this.getOwnerComponent().getModel();
                 oDataModel.read("/PropiedadSet", {
                     success: function (oResponse) {
-                    
+                        
                     },
                     error: function (oError) {
                         MessageToast.show("Error al leer las propiedades")

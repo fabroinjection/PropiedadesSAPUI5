@@ -1,23 +1,24 @@
 sap.ui.define([
     "./BaseController",
     "sap/m/MessageToast",
+    "../model/formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (BaseController, MessageToast) {
+    function (BaseController, MessageToast, formatter) {
         "use strict";
         var that;
-        var selectedItem = null;
+        var selectedItem;
         var oPropiedad;
         var sPropiedad;
         var oVisita;
         return BaseController.extend("com.softtek.propiedadesaca.controller.Detail", {
+            formatter: formatter,
             onInit: function () {
                 that = this;
                 var oRouter = this.getRouter();
                 oRouter.getRoute("Detail").attachPatternMatched(this._onPatternMatched, this);
-                this._toggleToolbarVisibility();
             },
             _getPropiedad: function (sPath) {
                 var oDataModel = this.getOwnerComponent().getModel();
@@ -31,6 +32,8 @@ sap.ui.define([
                 });
             },
             _onPatternMatched: function (oEvent) {
+                this.selectedItem = undefined;
+                this._toggleToolbarVisibility();
                 sPropiedad = oEvent.getParameter("arguments").idPropiedad;
                 let oModel = this.getOwnerComponent().getModel();
                 oModel.metadataLoaded().then(function () {
@@ -161,7 +164,6 @@ sap.ui.define([
             _toggleToolbarVisibility: function() {
                 var selectedItem = this.selectedItem;
                 var oToolbar = this.getView().byId("_IDGenToolbar1");
-            
                 if (selectedItem) {
                     oToolbar.setVisible(true);
                 } else {
@@ -198,6 +200,9 @@ sap.ui.define([
                 if (!that._validarVisita(oEntry)) {
                     return;
                 };
+                let fecha = new Date(oEntry.Fecha);
+                fecha.setDate(fecha.getDate() + 1);
+                oEntry.Fecha = fecha;
                 oEntry.Puntuacion = parseFloat(oEntry.Puntuacion, 0);
                 oEntry.Fecha = new Date(oEntry.Fecha);
                 var sPath = oEvent.getSource().getBindingContext().getPath();
@@ -272,7 +277,9 @@ sap.ui.define([
                     return;
                 }
                 oEntry.Puntuacion = parseFloat(oEntry.Puntuacion, 0);
-                oEntry.Fecha = new Date(oEntry.Fecha);
+                let fecha = new Date(oEntry.Fecha);
+                fecha.setDate(fecha.getDate() + 1);
+                oEntry.Fecha = fecha;
                 var sPath = oEvent.getSource().getBindingContext().getPath();
                 var idPropiedad = sPath.match(/\('([^']+)'\)/)[1];
                 oEntry.IdPropiedad = idPropiedad;
